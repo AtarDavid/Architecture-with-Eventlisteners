@@ -14,8 +14,11 @@ export const renderNotes = notes => {
     .map(
       (note, index) => {
         return `
-        <div class="note col-lg-3" id=${index} title="Click to remove">
+        <div class="note col-lg-3">
           ${note}
+          <button id=${index} type="button" class="close" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
         </div>
       `
       }
@@ -31,8 +34,8 @@ const targetNotes = () => {
   // Check if we have a note and eventually attach an eventlistner
   if (domElements.noteDiv !== null)
     domElements.noteDiv.forEach(oneDiv => {
-      oneDiv.addEventListener("click", () => {
-        const id = oneDiv.id;
+      oneDiv.lastElementChild.addEventListener("click", () => {
+        const id = oneDiv.lastElementChild.id;
         // trigger
         noteStorage.emit("removeItem", id)
       })
