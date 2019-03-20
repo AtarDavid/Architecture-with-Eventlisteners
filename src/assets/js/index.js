@@ -4,7 +4,7 @@ import { domElements } from "./helper"
 
 const { addNoteButton, addNoteInput, noteDiv } = domElements
 
-addNoteButton.addEventListener("click", () => {
+addNoteInput.addEventListener("change", () => {
   const note = addNoteInput.value
   if (note) {
     noteStorage.emit("addItem", note)
