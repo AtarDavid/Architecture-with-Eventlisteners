@@ -14,9 +14,9 @@ export const renderNotes = notes => {
     .map(
       (note, index) => {
         return `
-        <div class="note col-lg-3">
-          ${note}
-          <button id=${index} type="button" class="close" aria-label="Close">
+        <div id=${index} class="note col-lg-3">
+        <div class="text">${note}</div>
+          <button type="button" class="close" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
         </div>
@@ -25,7 +25,7 @@ export const renderNotes = notes => {
     )
     .join("")
 
-  // Only if I have the notes I can target them and add the eventListners
+  // Only if I have the notes I can target them and add the eventListeners
   domElements.noteDiv = document.querySelectorAll(".note")
   targetNotes();
 }
@@ -35,7 +35,8 @@ const targetNotes = () => {
   if (domElements.noteDiv !== null)
     domElements.noteDiv.forEach(oneDiv => {
       oneDiv.lastElementChild.addEventListener("click", () => {
-        const id = oneDiv.lastElementChild.id;
+        console.log(event)
+        const id = oneDiv.id;
         // trigger
         noteStorage.emit("removeItem", id)
       })
